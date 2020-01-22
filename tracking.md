@@ -1,6 +1,4 @@
-Down 5 React 
-
-React Jan 21 47-49
+Down 2 React 
 
 All so study on functions from javascript.info 
 
