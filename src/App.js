@@ -1,68 +1,115 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
-
 class App extends Component {
-  constructor() {
-    super();
 
-    this.handleClick2 = this.handleClick1.bind(this);
+  // There will be times when you need to use props inside of the constructor.
+
+  // It is recomended that you pass in props to the constructor and super methods.
+
+  // In order to do that pass props to the constructor() method and super() method.
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+      // Now we have access to the props property add which we defined in index.js
+      count: 40 + this.props.add 
+    }
   }
 
-  handleClick1() {
-    console.log('button 1 clicked');
-    console.log(this);
+  // In React mutilpe setState() calls will be batched together and and executed as single update for better performance.
+
+  /*
+
+  // setState() method is an asynchronous method. As in other code will run while the method is resolving.
+
+  // This is why if we want to check the status of the state when setState() is called we need a call back
+  // function that is called after setState() runs sometime in the future.
+
+
+  // Will run the console.log before setState() updates state due to asynchronous nature.
+  handleClick = () => {
+    this.setState({count: this.state.count + 1})
+    console.log(this.state)
   }
 
-  handleClick3 = () => {
-    console.log('button 3 clicked');
-    console.log(this);
+  // Will run console.log after setState() updates state.
+  handleClick = () => {
+    this.setState({count: this.state.count + 1}, () => console.log(this.state))
   }
+
+  // Currently the above examples of handleClick() will work fine since this App is very simple.
+
+  // The above examples of handleClick() is considered a bad practice. 
+
+  // The reason why they are considered a bad practice is because of how React batches multiple updates.
+
+  // There is no gurantee that the latest version of count will be the latest version of the state since
+  // multiple setState() calls could be modifying the same state property such as count in this example.
+
+ */
+
+  // Rule of thumb in React. If you are updating state and are using state or props inside of the update use
+  // a function instead of an object:
+
+  // We pass in a function as the 1st argument instead an object.
+
+  // 1st argument of our function is the prevState.
+
+  // prevState is the latest previous state before the state update.
+
+  // prevProps is the latest previous props before any updates.
+
+  // Both insure that we have the latest state and props before any updates.
+
+  handleClick = () => {
+    this.setState((prevState, prevProps) => {
+      return { count: prevState.count + prevProps.add }
+    }, 
+    
+    () => console.log(this.state))
+  }
+
+  /*
+
+  // If we where goint to just pass in a string for example as a state change we could still pass
+  // in an object for our 1st argument in setState()
+
+  handleClick = () => this.setState({count: 'doggie'});
+
+  */
+
+  /*
   
+  Summary:
 
+  1. State updates are asynchronous.
+
+  2. If you ever want to manipulate or use state somehow after the update. Then add
+     in a second parameter to setState() which will be a function where you can use that updated state (like console.log() example).
+  
+  3. If are accessing state or props via setState() pass in a function as the first argument.
+  
+    https://css-tricks.com/understanding-react-setstate/
+    
+  */
+ 
   render() {
     return (
-
       <div>
+        <p>{this.state.count}</p>
 
-        {/* The () envokes the function so it runs as soon as the render() method runs. */}
-        {/* Clicking this button will do thing since the function was already envoked. */}
-        <button onClick={this.handleClick1()}>click 1</button>
-
-        {/* Without () we are defining a function to be ran when the event triggers the function via button click */}
-        {/* So handleClick() from above gets ran. */}
-        {/* When the render() is ran again the keyword this will be consoled out as our App component. */}
-        {/* When we click on the button the console.log for this will return undifined because at that time this
-        refers to the button element itself. */}        
-        <button onClick={this.handleClick1}>click 2</button>
-
-
-        {/* When we click this button the handleClick1 function will run. */}
-        {/* This is because we stored handlClick1 inside of handleClick2 so now handleClick2 will be a 
-        reference for handleClick1. */}
-        {/* The keyword this will now also return our App component. This is because we bound the keyword
-        this in our constructor() when we stored assigned handleClick1 inside of handleClick2. */}
-        <button onClick={this.handleClick2}>click 3</button>
-
-        {/* handleClick3 is ran like normal. */}
-        {/* handleClick3 will log out the keyword this because arrow functions have access to the keyword this
-        as the arrow function is defined. */}
-        <button onClick={this.handleClick3}>click 4</button>
-
-        
-        {/* A good rule of thumb is this: Use arrow functions on any class methods 
-        you define and aren't part of React (i.e. render(), componentDidMount()). */}
-
-        {/* If you want to learn more about this, have a read here: https://reactjs.org/docs/handling-events.html */}
-
+        <button onClick={this.handleClick}>
+          Update State
+        </button>
       </div>
-
+    
+      
     )
 
   }
 }
-
-
 
 export default App;
