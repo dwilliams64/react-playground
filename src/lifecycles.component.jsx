@@ -15,6 +15,8 @@ class Lifecycles extends React.Component {
     console.log('constructor!');
   }
 
+  // componentDidMout() will run after the component is rendered to the page
+  // which is after the render() method is ran.
   componentDidMount() {
     console.log('componentDidMount!');
   }
@@ -58,7 +60,7 @@ Summary:
     a. The initial component is being loaded at this time.
 
 3. Next componentDidMount() method is fired off if present.
-    a. Once component is mounted this method will fire off.
+    a. Once component is mounted this method will fire off (after render() method is ran).
     b. We used to this for our API call. This allowed the component to mount and then fetch data from the API
         just in case the API call was two slow, at least the component was mounted first before the call was made.
 
