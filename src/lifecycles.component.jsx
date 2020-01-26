@@ -10,11 +10,19 @@ class Lifecycles extends React.Component {
   componentDidMount() {
     console.log('componentDidMount!');
   }
-
-  // Runs after the component updates when state or props change.
+  
   componentDidUpdate() {
     console.log('componentDidUpdate!');
   }
+
+  // componentWillUnmount() will fire off when the
+  // component is no longer part of the DOM.
+
+  // It is used mainly for cleaning up our code when the
+  // component is no longer needed. 
+
+  // This can prevent memory leaks that garbage collecting doesn't
+  // have access to.
 
   componentWillUnmount() {
     console.log('componentWillUnmount!');
