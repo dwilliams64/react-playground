@@ -7,3 +7,7 @@ Reivew classes and prototypes.
 Look up .bind()
 
 Look at destructing. 
+
+Review css-tricks setState() article.
+
+Review http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
