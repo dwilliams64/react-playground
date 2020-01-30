@@ -15,6 +15,8 @@ import {
 // making sure things like the back button and bookmarks
 // work properly.
 
+// The BrowserRouter router component gives us access to routing in our application.
+
 export default function BasicExample() {
   return (
     <Router>
