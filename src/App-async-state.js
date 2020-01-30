@@ -11,8 +11,6 @@ import './App.css';
 // Remember we have access to props through the constructor and super methods. Without those
 // we loose access to props.
 
-
-
 class App2 extends Component {
 
     // Now our state is initialized as class field declaration.
