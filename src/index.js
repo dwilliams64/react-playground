@@ -3,13 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
 
-// State can live anywhere inside of React.
+ReactDOM.render(
+    // For this setup we took out the link components from the router-basics
+    // branch. 
 
-// We can pass props to our App component from our index.js file
-ReactDOM.render(<App add={1}/>, document.getElementById('root'));
+    // We placed our App component inside of the BrowserRouter component.
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+    <BrowserRouter>
+        <App />
+    </ BrowserRouter>
+    , document.getElementById('root'));
+
+
 serviceWorker.unregister();
